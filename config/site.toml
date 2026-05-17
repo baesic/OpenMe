@@ -1,6 +1,6 @@
 title = "OpenMe"
 description = "GitHub Actions와 Rust/WASM 기반 자동 블로그"
-base_url = "/"
+base_url = "/OpenMe/"
 language = "ko-KR"
 author = "baesic"
 copyright = "Whoborn Inc. 2026"
