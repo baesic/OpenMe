@@ -85,4 +85,4 @@ API 키는 코드에 하드코딩하지 않는다. GitHub Actions Secret을 통�
 
 ## 저작자
 
-Whoborn Inc. baesic
+baesic
