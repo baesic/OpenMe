@@ -1,0 +1,8 @@
+{
+  "slug": "개발자-개인-블로그를-github-actions로-대체하기",
+  "hero_image_prompt": "16:9 editorial illustration for a Korean technical blog about 개발자 개인 블로그를 GitHub Actions로 대체하기, Rust, WebAssembly, GitHub Actions workflow, clean interface, no readable text",
+  "hero_alt": "개발자 개인 블로그를 GitHub Actions로 대체하기 자동화 흐름을 표현한 대표 이미지",
+  "social_card_prompt": "16:9 editorial illustration for a Korean technical blog about 개발자 개인 블로그를 GitHub Actions로 대체하기, Rust, WebAssembly, GitHub Actions workflow, clean interface, no readable text, social card crop, high contrast focal center",
+  "hero_image": "/images/posts/개발자-개인-블로그를-github-actions로-대체하기.webp",
+  "social_image": "/images/posts/개발자-개인-블로그를-github-actions로-대체하기-social.webp"
+}

@@ -1,0 +1,8 @@
+{
+  "slug": "welcome-openme",
+  "hero_image_prompt": "16:9 editorial illustration of a Rust and WebAssembly powered publishing workflow on GitHub Pages, clean technical style, no text",
+  "hero_alt": "Rust와 WebAssembly 기반 블로그 자동화 흐름을 표현한 대표 이미지",
+  "social_card_prompt": "16:9 editorial illustration of a Rust and WebAssembly powered publishing workflow on GitHub Pages, clean technical style, no text, social card crop, high contrast focal center",
+  "hero_image": "/images/posts/welcome-openme.webp",
+  "social_image": "/images/posts/welcome-openme-social.webp"
+}

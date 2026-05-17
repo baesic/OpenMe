@@ -1,0 +1,68 @@
+name: Deploy Pages
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "content/posts/**"
+      - "static/**"
+      - "config/site.toml"
+      - "crates/**"
+      - "Cargo.toml"
+      - ".github/workflows/deploy-pages.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add Rust WASM targets
+        run: rustup target add wasm32-wasip1 wasm32-unknown-unknown
+
+      - name: Install Wasmtime
+        run: |
+          curl -sSf https://wasmtime.dev/install.sh | bash
+          echo "$HOME/.wasmtime/bin" >> "$GITHUB_PATH"
+
+      - name: Build static site generator
+        run: cargo build --release --target wasm32-wasip1 -p sitegen
+
+      - name: Build browser WASM
+        run: cargo build --release --target wasm32-unknown-unknown -p web-ui
+
+      - name: Generate static site with WASM
+        run: |
+          wasmtime --dir . target/wasm32-wasip1/release/sitegen.wasm -- \
+            --config config/site.toml
+          mkdir -p public/wasm
+          cp target/wasm32-unknown-unknown/release/openme_web_ui.wasm public/wasm/openme_web_ui.wasm
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

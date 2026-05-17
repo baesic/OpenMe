@@ -1,0 +1,24 @@
+[providers.researcher]
+kind = "text"
+model = "provider-a-model"
+enabled = true
+
+[providers.writer_a]
+kind = "text"
+model = "provider-b-model"
+enabled = true
+
+[providers.writer_b]
+kind = "text"
+model = "provider-c-model"
+enabled = true
+
+[providers.evaluator]
+kind = "text"
+model = "provider-d-model"
+enabled = true
+
+[providers.image]
+kind = "image"
+model = "provider-image-model"
+enabled = true

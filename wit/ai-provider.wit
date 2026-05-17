@@ -1,0 +1,45 @@
+package openme:ai-provider;
+
+interface text-generation {
+  record request {
+    provider: string,
+    model: string,
+    system: string,
+    prompt: string,
+    response-schema: option<string>,
+  }
+
+  record response {
+    provider: string,
+    model: string,
+    body: string,
+    raw-json: option<string>,
+  }
+
+  generate: func(request: request) -> result<response, string>;
+}
+
+interface image-generation {
+  record request {
+    provider: string,
+    model: string,
+    prompt: string,
+    alt: string,
+    width: u32,
+    height: u32,
+    output-path: string,
+  }
+
+  record response {
+    output-path: string,
+    content-type: string,
+    metadata-json: string,
+  }
+
+  generate-image: func(request: request) -> result<response, string>;
+}
+
+world ai-pipeline {
+  import text-generation;
+  import image-generation;
+}

@@ -1,0 +1,27 @@
+package openme:http-client;
+
+interface client {
+  record header {
+    name: string,
+    value: string,
+  }
+
+  record request {
+    method: string,
+    url: string,
+    headers: list<header>,
+    body: option<list<u8>>,
+  }
+
+  record response {
+    status: u16,
+    headers: list<header>,
+    body: list<u8>,
+  }
+
+  send: func(request: request) -> result<response, string>;
+}
+
+world http-adapter {
+  import client;
+}

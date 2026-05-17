@@ -1,0 +1,12 @@
+title: "개발자 개인 블로그를 GitHub Actions로 대체하기"
+audience: "개발자, 1인 창업자, 기술 블로거"
+goal: "기술 검토와 구현 방향 제시"
+tone: "전문적이되 이해하기 쉬운 설명"
+length: "3500-5000자"
+keywords:
+  - github actions
+  - rust wasm
+  - ai writer
+  - github pages
+references:
+  policy: "공식 문서 우선"

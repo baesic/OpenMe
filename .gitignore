@@ -1,0 +1,9 @@
+/target/
+/public/
+!.gitkeep
+*.wasm
+*.tmp
+.DS_Store
+.env
+.env.*
+!.env.example

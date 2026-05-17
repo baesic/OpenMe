@@ -1,0 +1,20 @@
+title = "OpenMe"
+description = "GitHub Actions와 Rust/WASM 기반 자동 블로그"
+base_url = "/"
+language = "ko-KR"
+author = "baesic"
+copyright = "Whoborn Inc. 2026"
+
+[build]
+output_dir = "public"
+posts_dir = "content/posts"
+assets_dir = "static"
+
+[publish]
+default_status = "draft"
+
+[docx]
+publish_mode = "draft"
+extract_images = true
+convert_tables = true
+preserve_headings = true

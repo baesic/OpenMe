@@ -1,0 +1,13 @@
+package openme:storage;
+
+interface repository-storage {
+  read-text: func(path: string) -> result<string, string>;
+  write-text: func(path: string, body: string) -> result<bool, string>;
+  read-bytes: func(path: string) -> result<list<u8>, string>;
+  write-bytes: func(path: string, body: list<u8>) -> result<bool, string>;
+  list: func(path: string, extension: option<string>) -> result<list<string>, string>;
+}
+
+world storage-adapter {
+  import repository-storage;
+}

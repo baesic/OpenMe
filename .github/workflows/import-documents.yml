@@ -1,0 +1,52 @@
+name: Import documents
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "imports/docs/**"
+      - "imports/docx/**"
+      - "config/site.toml"
+      - "crates/**"
+      - "Cargo.toml"
+      - ".github/workflows/import-documents.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add Rust WASI target
+        run: rustup target add wasm32-wasip1
+
+      - name: Install Wasmtime
+        run: |
+          curl -sSf https://wasmtime.dev/install.sh | bash
+          echo "$HOME/.wasmtime/bin" >> "$GITHUB_PATH"
+
+      - name: Build document importer
+        run: cargo build --release --target wasm32-wasip1 -p doc-ingest
+
+      - name: Run document importer WASM
+        run: |
+          wasmtime --dir . target/wasm32-wasip1/release/doc-ingest.wasm -- \
+            --config config/site.toml \
+            --docs imports/docs \
+            --docx imports/docx
+
+      - name: Commit imported documents
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/drafts content/posts static/images/imported
+          if git diff --cached --quiet; then
+            echo "No imported changes."
+          else
+            git commit -m "Import OpenMe documents"
+            git push
+          fi

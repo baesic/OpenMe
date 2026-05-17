@@ -1,0 +1,7 @@
+[weights]
+accuracy = 0.25
+structure = 0.15
+readability = 0.15
+practicality = 0.20
+seo = 0.10
+originality = 0.15
